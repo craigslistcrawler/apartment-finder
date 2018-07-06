@@ -1,8 +1,7 @@
-from scraper import do_scrape
-import settings
 import time
 import sys
 import traceback
+from scraper import do_scrape
 
 if __name__ == "__main__":
     while True:
@@ -17,4 +16,4 @@ if __name__ == "__main__":
             traceback.print_exc()
         else:
             print("{}: Successfully finished scraping".format(time.ctime()))
-        time.sleep(settings.SLEEP_INTERVAL)
+        time.sleep(30)
