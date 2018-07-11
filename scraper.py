@@ -53,16 +53,19 @@ def scrape_area():
             break
         except Exception:
             continue
+        print("prelisting")
         listing = session.query(Listing).filter_by(cl_id=result["id"]).first()
-
+        print("postlisting")
         # Don't store the listing if it already exists.
         if listing is None:
+            print("listingisnone")
             price = 0
             try:
+                print("price")
                 price = float(result["price"].replace("$", ""))
             except Exception:
                 pass
-
+            print("here")
             # Create the listing object.
             listing = Listing(
                 link=result["url"],
@@ -70,11 +73,13 @@ def scrape_area():
                 price=price,
                 cl_id=result["id"]
             )
+            print("there")
 
             # Save the listing so we don't grab it again.
             session.add(listing)
             session.commit()
             results.append(result)
+            print("wtf")
     gen = cl_s.get_results(sort_by='newest', limit=10)
     while True:
         print("second")
